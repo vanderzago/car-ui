@@ -57,24 +57,6 @@
           [(ngModel)]="car.price"
           required>
       </div>
-<!--
-      <div class="ui-g-6 ui-md-6 ui-fluid">
-        <label>Data de Cadastro</label>
-        <p-calendar name="creationDate" dateFormat="dd/mm/yy"
-          [inline]="false" [readonlyInput]="false" [showIcon]="false"
-          [(ngModel)]="car.creationDate"
-          #creationDate="ngModel" required></p-calendar>
-
-        <app-message [control]="creationDate" error="required"
-          text="Informe uma data de criação"></app-message>
-      </div>
-
-      <div class="ui-g-6 ui-md-6 ui-fluid">
-        <label>Data da Atualização</label>
-        <p-calendar dateFormat="dd/mm/yy" name="updateDate"
-          [(ngModel)]="car.updateDate"></p-calendar>
-      </div>
--->
       <div class="ui-g-12 ui-fluid">
         <label>Descrição</label>
         <textarea pInputTextarea rows="3" name="description"
@@ -85,7 +67,7 @@
         <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
         <button pButton type="button" label="Novo" class="ui-button-info"
           (click)="newForm(f)"></button>
-        <a routerLink="/cars">Voltar para a pesquisa</a>
+        <a routerLink="/cars-ui">Voltar para a pesquisa</a>
       </div>
     </div>
 

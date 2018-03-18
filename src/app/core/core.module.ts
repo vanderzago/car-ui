@@ -12,6 +12,10 @@ import { CarService } from './../cars/car.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
+registerLocaleData(ptBr)
+
 @NgModule({
   imports: [
     CommonModule,

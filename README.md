@@ -29,10 +29,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Steps
 1  npm install primeng --save
 2  npm install font-awesome --save
-3  vi .angular-cli.json and included css lines for primeng and font-awesome
-4  npm install moment --save
-5  npm install ng2-toasty --save
-6  npm install ng2-currency-mask --save
+3  npm install moment --save
+4  npm install ng2-toasty --save
+5  npm install ng2-currency-mask --save
+6  vi .angular-cli.json and included css lines for primeng, font-awesome and toasty
 7  ng g m cars
 8  ng g c cars/car-input
 9  ng g c cars/car-search

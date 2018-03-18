@@ -28,36 +28,36 @@
                     {{ car.newCar ? 'Sim' : 'Não' }}
                   </a>
               </ng-template>
-            </p-column>  
-            <p-column field="price" header="Preço" styleClass="col-valor">
-                <ng-template let-car="rowData" pTemplate="body">
-                  <span>{{ car.valor | number:'1.2-2' }}</span>
-                </ng-template>
-              </p-column>
-              <p-column header="Cadastro" styleClass="col-data">
+          </p-column> 
+          <p-column field="price" header="Preço" styleClass="col-valor">
             <ng-template let-car="rowData" pTemplate="body">
-                <span>{{ car.creationDate | date:'dd/MM/yyyy' }}</span>
+              <span>{{ car.price | number:'1.2-2' }}</span>
             </ng-template>
           </p-column>
-          <p-column header="Atualização" styleClass="col-data">
+          <p-column header="Cadastro" styleClass="col-data">
+            <ng-template let-car="rowData" pTemplate="body">
+              <span>{{ car.creationDate | date:'dd/MM/yyyy' }}</span>
+              </ng-template>
+          </p-column>
+        <p-column header="Atualização" styleClass="col-data">
               <ng-template let-car="rowData" pTemplate="body">
                   <span>{{ car.updateDate | date:'dd/MM/yyyy' }}</span>
               </ng-template>
-          </p-column>
-          <p-column styleClass="col-acoes">
+        </p-column>
+        <p-column styleClass="col-acoes">
             <ng-template let-car="rowData" pTemplate="body">
               <a pButton icon="fa-pencil" pTooltip="Editar"
-              tooltipPosition="top" [routerLink]="['/cars', car.cod]"></a>
+              tooltipPosition="top" [routerLink]="['/cars-ui', car.cod]"></a>
               <button pButton icon="fa-trash"
                 pTooltip="Excluir" tooltipPosition="top"
                 (click)="confirmExclusion(car)"></button>
             </ng-template>
-          </p-column>
+        </p-column>
       </p-dataTable>
     </div>
 
     <div class="ui-g-12">
-      <a pButton label="Novo Carro" routerLink="/cars/new"></a>
+      <a pButton label="Novo Carro" routerLink="/cars-ui/new"></a>
     </div>
   </div>
 

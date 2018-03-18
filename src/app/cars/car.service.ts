@@ -1,8 +1,8 @@
-import { URLSearchParams } from '@angular/http';
+import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import * as moment from 'moment';
 
 import { environment } from './../../environments/environment';
 import { Car } from './../core/model';
@@ -55,14 +55,22 @@ export class CarService {
   }
 
   add(car: Car): Promise<Car> {
-    return this.http.post(this.carsUrl, JSON.stringify(car))
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(this.carsUrl, JSON.stringify(car), { headers })
       .toPromise()
       .then(response => response.json());
   }
 
   update(car: Car): Promise<Car> {
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+
     return this.http.put(`${this.carsUrl}/${car.cod}`,
-        JSON.stringify(car))
+        JSON.stringify(car), { headers })
       .toPromise()
       .then(response => response.json() as Car);
   }
@@ -70,12 +78,34 @@ export class CarService {
   searchByCode(cod: number): Promise<Car> {
     return this.http.get(`${this.carsUrl}/${cod}`)
       .toPromise()
-      .then(response => response.json() as Car);
+      .then(response => {
+        const car = response.json() as Car;
+
+        this.convertStringToDate([car]);
+
+        return car;
+      });
   }
 
   changeStatus(cod: number, newCar: boolean): Promise<void> {
-    return this.http.put(`${this.carsUrl}/${cod}/newcar`, newCar)
+    const headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.carsUrl}/${cod}/newcar`, newCar, { headers })
       .toPromise()
       .then(() => null);
+  }
+
+  private convertStringToDate(cars: Car[]) {
+    for (const car of cars) {
+      car.creationDate = moment(car.creationDate,
+        'YYYY-MM-DD').toDate();
+
+      if (car.updateDate) {
+        car.updateDate = moment(car.updateDate,
+          'YYYY-MM-DD').toDate();
+      }
+    }
   }
 }

@@ -1,9 +1,11 @@
 import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastyService } from 'ng2-toasty';
+import * as moment from 'moment';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Car } from './../../core/model';
@@ -60,12 +62,12 @@ export class CarInputComponent implements OnInit {
   }
 
   addCar(form: FormControl) {
-    this.car.creationDate = new Date()
+    this.car.creationDate = new Date();
     this.carService.add(this.car)
       .then(carAdded => {
         this.toasty.success('Carro adicionado com sucesso!');
 
-        this.router.navigate(['/cars', carAdded.cod]);
+        this.router.navigate(['/cars-ui', carAdded.cod]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -89,7 +91,7 @@ export class CarInputComponent implements OnInit {
       this.car = new Car();
     }.bind(this), 1);
 
-    this.router.navigate(['/cars/new']);
+    this.router.navigate(['/cars-ui/new']);
   }
 
   updateTitle() {

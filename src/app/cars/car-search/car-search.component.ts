@@ -77,6 +77,10 @@ export class CarSearchComponent implements OnInit {
       .then(() => {
         car.newCar = newStatus;
         this.toasty.success(`Status do Carro modificado com sucesso!`);
+        car.updateDate = new Date()
+        this.carService.update(car)
+          .then(()=>{})
+          .catch(erro => this.errorHandler.handle(erro));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
