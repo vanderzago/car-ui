@@ -1,0 +1,93 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="saveCar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Carro</h1>
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+
+        <label>Marca</label>
+        <input pInputText type="text" name="brand"
+          [(ngModel)]="car.brand"
+          #brand="ngModel" required maxlength="40">
+
+        <app-message [control]="brand" error="required"
+          text="Informe a marca"></app-message>
+        <app-message [control]="brand" error="maxlength"
+          text="Máximo de {{ brand.errors?.maxlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Modelo</label>
+        <input pInputText type="text" name="model"
+          [(ngModel)]="car.model"
+          #model="ngModel" required maxlength="50">
+
+        <app-message [control]="model" error="required"
+          text="Informe o modelo"></app-message>
+        <app-message [control]="model" error="maxlength"
+          text="Máximo de {{ brand.errors?.maxlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Cor</label>
+        <input pInputText type="text" name="color"
+          [(ngModel)]="car.color"
+          #color="ngModel" required maxlength="30">
+
+        <app-message [control]="color" error="required"
+          text="Informe a cor"></app-message>
+        <app-message [control]="color" error="maxlength"
+          text="Máximo de {{ color.errors?.maxlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-6 ui-md-6 ui-fluid">
+          <label>Ano</label>
+          <p-inputMask name="year" mask="9999"
+          [(ngModel)]="car.year" placeholder="1999"
+          #year="ngModel" required></p-inputMask>
+        </div>
+
+      <div class="ui-g-6 ui-md-6 ui-fluid">
+        <label>Preço</label>
+        <input pInputText type="text" name="price" placeholder="0,00"
+          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+          [(ngModel)]="car.price"
+          required>
+      </div>
+<!--
+      <div class="ui-g-6 ui-md-6 ui-fluid">
+        <label>Data de Cadastro</label>
+        <p-calendar name="creationDate" dateFormat="dd/mm/yy"
+          [inline]="false" [readonlyInput]="false" [showIcon]="false"
+          [(ngModel)]="car.creationDate"
+          #creationDate="ngModel" required></p-calendar>
+
+        <app-message [control]="creationDate" error="required"
+          text="Informe uma data de criação"></app-message>
+      </div>
+
+      <div class="ui-g-6 ui-md-6 ui-fluid">
+        <label>Data da Atualização</label>
+        <p-calendar dateFormat="dd/mm/yy" name="updateDate"
+          [(ngModel)]="car.updateDate"></p-calendar>
+      </div>
+-->
+      <div class="ui-g-12 ui-fluid">
+        <label>Descrição</label>
+        <textarea pInputTextarea rows="3" name="description"
+          [(ngModel)]="car.description"></textarea>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-info"
+          (click)="newForm(f)"></button>
+        <a routerLink="/cars">Voltar para a pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>

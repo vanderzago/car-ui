@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="ui-g">
+
+    <div class="ui-g-12">
+      <h1>Carros</h1>
+    </div>
+
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-dataTable [value]="cars" [responsive]="true"
+        emptyMessage="Nenhuma carro encontrado"
+        [paginator]="true" [rows]="filter.itemsPerPage"
+        [lazy]="true" [totalRecords]="totalRegisters"
+        (onLazyLoad)="onChangePage($event)"
+        #tabela>
+          <p-column field="brand" header="Marca"></p-column>
+          <p-column field="model" header="Modelo"></p-column>
+          <p-column field="color" header="Cor"></p-column>
+          <p-column field="year" header="Ano"></p-column>
+          <p-column field="newCar" header="Novo?">
+              <ng-template let-car="rowData" pTemplate="body">
+                  <a href="javascript:;"
+                      [pTooltip]="car.newCar ? 'nao' : 'sim'"
+                      tooltipPosition="top"
+                      (click)="changeStatus(car)">
+                    {{ car.newCar ? 'Sim' : 'Não' }}
+                  </a>
+              </ng-template>
+            </p-column>  
+            <p-column field="price" header="Preço" styleClass="col-valor">
+                <ng-template let-car="rowData" pTemplate="body">
+                  <span>{{ car.valor | number:'1.2-2' }}</span>
+                </ng-template>
+              </p-column>
+              <p-column header="Cadastro" styleClass="col-data">
+            <ng-template let-car="rowData" pTemplate="body">
+                <span>{{ car.creationDate | date:'dd/MM/yyyy' }}</span>
+            </ng-template>
+          </p-column>
+          <p-column header="Atualização" styleClass="col-data">
+              <ng-template let-car="rowData" pTemplate="body">
+                  <span>{{ car.updateDate | date:'dd/MM/yyyy' }}</span>
+              </ng-template>
+          </p-column>
+          <p-column styleClass="col-acoes">
+            <ng-template let-car="rowData" pTemplate="body">
+              <a pButton icon="fa-pencil" pTooltip="Editar"
+              tooltipPosition="top" [routerLink]="['/cars', car.cod]"></a>
+              <button pButton icon="fa-trash"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmExclusion(car)"></button>
+            </ng-template>
+          </p-column>
+      </p-dataTable>
+    </div>
+
+    <div class="ui-g-12">
+      <a pButton label="Novo Carro" routerLink="/cars/new"></a>
+    </div>
+  </div>
+
+</div>
